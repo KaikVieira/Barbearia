@@ -1,0 +1,660 @@
+:root{
+  --azul-escuro: #0f4b68;
+  --azul-medio: #157ca1;
+  --azul-claro: #49c0d6;
+  --bg-page-start: #bfeef4;
+  --bg-page-end: #eafcff;
+  --cinza-claro: #f1f5f7;
+  --branco: #ffffff;
+  --muted: #617d8b;
+  --sombra: rgba(6,20,28,0.08);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --transition: 200ms cubic-bezier(.2,.9,.3,1);
+  --card-gap: 20px;
+  --max-width: 960px;
+  --left-width: 360px;
+  --focus-ring: rgba(73,192,214,0.18);
+  box-sizing: border-box;
+  --bg-deep: #041827;
+  --panel: rgba(6,18,28,0.7);
+  --glass: rgba(255,255,255,0.02);
+  --gold: #e4b71f;
+  --gold-strong: #f2c05a;
+  --juno-orange: #ff8b2b;
+  --juno-orange-2: #ff9f52;
+  --neon-green: #12d08f;
+  --neon-blue: #3b8bff;
+  --muted: #9aa3b0;
+  --danger: #ff6b7a;
+  --success-dark: #0f8f61;
+  --card-radius: 14px;
+  --ease: cubic-bezier(.2,.9,.3,1);
+  --shadow-lg: 0 20px 60px rgba(2,8,20,0.6);
+}
+
+/* Reset box-sizing */
+*, *::before, *::after { box-sizing: inherit; }
+
+/* Page background / center */
+.agendar-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: linear-gradient(180deg, var(--bg-page-start), var(--bg-page-end));
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card principal - grid para controlar colunas */
+.agendar-card {
+  width: 100%;
+  max-width: var(--max-width);
+  display: grid;
+  grid-template-columns: var(--left-width) 1fr;
+  gap: var(--card-gap);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.98));
+  border-radius: calc(var(--radius-lg) + 4px);
+  box-shadow: 0 18px 40px var(--sombra), inset 0 1px 0 rgba(255,255,255,0.6);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* leve hover quando em desktop */
+.agendar-card:hover { transform: translateY(-6px); }
+
+/* Coluna esquerda (dark) com wave/curva inferior */
+.agendar-left {
+  background: linear-gradient(180deg, var(--azul-escuro), var(--azul-medio));
+  color: var(--branco);
+  padding: 36px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* curva/wave inferior que invade o painel direito */
+.agendar-left::after{
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 30%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 50%;
+  filter: blur(6px);
+  transform: translateY(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* conteúdo da coluna esquerda sobre a wave */
+.agendar-left > * { position: relative; z-index: 1; }
+
+/* Título */
+.agendar-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.3px;
+  text-align: center;
+  color: #eaf8fb;
+}
+
+/* Form de login */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* Inputs estilo pílula */
+.input-field {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+
+.input-field::placeholder { color: rgba(255,255,255,0.72); }
+
+.input-field:focus {
+  box-shadow: 0 8px 28px rgba(73,192,214,0.12);
+  border-color: rgba(73,192,214,0.28);
+  transform: translateY(-1px);
+}
+
+/* Botão primário estilo pílula */
+.btn-primary {
+  background: linear-gradient(90deg, var(--azul-claro), var(--azul-medio));
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 800;
+  color: var(--branco);
+  cursor: pointer;
+  box-shadow: 0 12px 34px rgba(73,192,214,0.12);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+.btn-primary:hover { transform: translateY(-3px); }
+.btn-primary:active { transform: translateY(-1px); }
+
+/* info do usuário */
+.agendar-info { font-size: 14px; color: rgba(255,255,255,0.92); text-align:center; }
+.cliente-logado strong { color: var(--azul-claro); }
+
+/* Coluna direita (conteúdo principal) */
+.agendar-right {
+  padding: 28px;
+  background: var(--cinza-claro);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border-left: 1px solid rgba(0,0,0,0.04);
+  min-height: 380px;
+}
+
+/* título data */
+.data-selecionada {
+  color: var(--azul-escuro);
+  font-weight: 800;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+/* serviços escolhidos list */
+.servicos-escolhidos h4 {
+  color: var(--azul-escuro);
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+.servicos-escolhidos ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.servicos-escolhidos li {
+  background: var(--branco);
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(6,20,28,0.04);
+  color: #042f3a;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Grid de horários - responsivo */
+.horarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: 12px;
+  justify-items: center;
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* botão hora - circular */
+.hora-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--branco);
+  border: 1px solid rgba(21,124,161,0.16);
+  color: var(--azul-escuro);
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+  user-select: none;
+}
+
+/* hover e foco */
+.hora-btn:hover:not(:disabled) { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(73,192,214,0.12); }
+.hora-btn:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+
+/* selecionado */
+.hora-btn.selecionado{
+  background: linear-gradient(90deg, var(--azul-claro), var(--azul-medio));
+  color: var(--branco);
+  box-shadow: 0 16px 40px rgba(73,192,214,0.18);
+  transform: translateY(-6px) scale(1.04);
+}
+
+/* disabled */
+.hora-btn:disabled,
+.hora-btn[disabled] {
+  opacity: 0.44;
+  cursor: not-allowed;
+  transform: none;
+  filter: grayscale(0.05);
+}
+
+/* sem horários */
+.sem-horarios {
+  text-align: center;
+  color: var(--azul-escuro);
+  font-weight: 600;
+  padding: 18px 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), transparent);
+  border-radius: 10px;
+}
+
+/* botão confirmar */
+.btn-confirmar {
+  margin-top: 6px;
+  background: linear-gradient(90deg, var(--azul-escuro), var(--azul-medio));
+  border: none;
+  border-radius: 999px;
+  padding: 14px;
+  font-weight: 800;
+  color: var(--branco);
+  cursor: pointer;
+  box-shadow: 0 14px 36px rgba(15,75,104,0.14);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-confirmar:hover { transform: translateY(-4px); }
+.btn-confirmar:active { transform: translateY(-1px); }
+
+/* Acessibilidade geral */
+:focus { outline: none; }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; border-radius: 8px; }
+
+/* Responsividade: medium -> single column stack */
+@media (max-width: 1024px) {
+  .agendar-card {
+    grid-template-columns: minmax(260px, 1fr) 1fr;
+  }
+  .agendar-left { padding: 32px 20px; }
+  .agendar-right { padding: 22px; }
+}
+
+/* Small screens: empilha (left acima) e ajusta wave */
+@media (max-width: 800px) {
+  .agendar-card {
+    grid-template-columns: 1fr;
+  }
+
+  .agendar-left {
+    padding: 28px 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  /* reduz o efeito da wave e posiciona no topo */
+  .agendar-left::after {
+    right: 10%;
+    bottom: -60px;
+    width: 180px;
+    height: 180px;
+    filter: blur(8px);
+  }
+
+  .agendar-right { padding: 18px; }
+  .horarios-grid { gap: 10px; }
+}
+
+/* Mobile narrow adjustments */
+@media (max-width: 600px) {
+  .agendar-container { padding: 18px; }
+  .agendar-card { gap: 14px; border-radius: 14px; }
+  .agendar-left { padding: 20px; }
+  .login-form { gap: 10px; }
+  .input-field { padding: 10px 12px; font-size: 14px; }
+  .btn-primary { padding: 10px 12px; font-size: 14px; }
+
+  .agendar-right { padding: 16px; }
+  .hora-btn { width: 52px; height: 52px; }
+  .horarios-grid { grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); gap: 10px; }
+  .servicos-escolhidos li { font-size: 13px; padding: 6px 10px; }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .agendar-card { width: 100%; padding: 6px; }
+  .agendar-left { padding: 18px; }
+  .agendar-title { font-size: 1.25rem; }
+  .login-form { max-width: 100%; }
+  .input-field { padding: 10px 12px; font-size: 13px; }
+  .btn-primary, .btn-confirmar { padding: 10px 12px; font-size: 14px; border-radius: 12px; }
+  .hora-btn { width: 48px; height: 48px; font-size: 13px; }
+  .horarios-grid { grid-template-columns: repeat(auto-fit, minmax(48px, 1fr)); gap: 8px; }
+  .agendar-right { padding: 12px; gap: 12px; }
+}
+
+/* Preferência de tema escuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  :root{
+    --bg-page-start: #071622;
+    --bg-page-end: #04212a;
+    --cinza-claro: #071724;
+    --sombra: rgba(0,0,0,0.6);
+  }
+  .agendar-container {
+    background: linear-gradient(180deg, var(--bg-page-start), var(--bg-page-end));
+  }
+  .agendar-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 14px 34px rgba(0,0,0,0.6); }
+  .agendar-left { background: linear-gradient(180deg, #072b3a, #083547); }
+  .agendar-right { background: #051620; border-left-color: rgba(255,255,255,0.02); }
+  .input-field { background: rgba(255,255,255,0.03); color: #dbeff1; border-color: rgba(255,255,255,0.04); }
+  .hora-btn { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.04); color: #dbeff1; }
+  .servicos-escolhidos li { background: rgba(255,255,255,0.02); color: #dbeff1; box-shadow:none; }
+}
+
+
+/* Botão principal do Dashboard - estilo inspirado no mockup */
+.btn-dashboard{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;                   /* formato pill */
+  border: 1px solid var(--glass-border);  /* borda suave */
+  background: linear-gradient(180deg, var(--teal-700) 0%, var(--teal-900) 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 26px var(--shadow), inset 0 -1px 0 rgba(255,255,255,0.04);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), opacity var(--transition);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* Pequeno destaque a esquerda (opcional caso não queira emoji inline) */
+.btn-dashboard::before{
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--accent), var(--teal-500));
+  box-shadow: 0 2px 6px rgba(63,183,194,0.25);
+  display: inline-block;
+  margin-right: 6px;
+  transform: translateY(-0.5px);
+}
+
+/* Hover / Active / Focus */
+.btn-dashboard:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(11,60,83,0.22), inset 0 -1px 0 rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, #13738b 0%, #0e4153 100%);
+}
+.btn-dashboard:active{ transform: translateY(-1px); }
+.btn-dashboard:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.btn-dashboard:focus-visible{
+  outline: 3px solid rgba(63,183,194,0.14);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* Responsivo - reduz padding/fonte em telas pequenas */
+@media (max-width: 420px){
+  .btn-dashboard{
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Variante "ghost" para usar em cards claros (opcional) */
+.btn-dashboard.ghost{
+  background: transparent;
+  color: var(--teal-900);
+  border: 1px solid rgba(11,60,83,0.06);
+  box-shadow: 0 6px 18px rgba(11,60,83,0.06);
+}
+
+
+/* ANIMAÇÃO REUTILIZÁVEL */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Opcional: container para visualizar combinação (não obrigatório) */
+.preview-wrap{
+  background: linear-gradient(180deg,var(--bg-deep), #071a2a);
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* -----------------------------
+   Mensagem: Dia Fechado (aviso)
+   ----------------------------- */
+.dia-fechado-message{
+  display:block;
+  width:100%;
+  max-width:720px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));
+  border-radius: var(--card-radius);
+  padding: 18px 20px;
+  box-shadow: 0 10px 36px rgba(0,8,20,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
+  border-left: 6px solid var(--juno-orange);
+  color: #e8f6ff;
+  animation: fadeUp 340ms var(--ease) both;
+  font-weight:700;
+}
+
+/* Título com ícone e destaque laranja */
+.dia-fechado-message h3{
+  margin: 0 0 8px 0;
+  font-size: 1.12rem;
+  color: var(--juno-orange);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-shadow: 0 3px 12px rgba(255,140,60,0.06);
+}
+
+/* Texto explicativo do aviso */
+.dia-fechado-message p{
+  margin:0;
+  font-size:0.98rem;
+  color: rgba(230,240,255,0.9);
+  font-weight:600;
+  line-height:1.45;
+  opacity:0.95;
+}
+
+/* Pequeno badge/icône opcional (pseudo) */
+.dia-fechado-message::before{
+  content: "📅";
+  margin-right:8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.05rem;
+  transform: translateY(2px);
+  filter: drop-shadow(0 6px 16px rgba(255,140,60,0.14));
+}
+
+/* -----------------------------
+   Mensagem: Agendamento Concluído
+   ----------------------------- */
+.agendamento-concluido{
+  display:block;
+  width:100%;
+  max-width:720px;
+  background: linear-gradient(180deg, rgba(8,40,32,0.15), rgba(4,20,18,0.18));
+  border-radius: var(--card-radius);
+  padding: 18px 20px;
+  box-shadow: 0 14px 50px rgba(8,90,70,0.10), 0 0 36px rgba(40,211,154,0.06);
+  border: 1px solid rgba(20,110,80,0.06);
+  color: #eafff4;
+  animation: fadeUp 360ms var(--ease) both;
+  position: relative;
+  overflow: visible;
+  font-weight:700;
+}
+
+/* Título com check e brilho verde */
+.agendamento-concluido h3{
+  margin: 0 0 8px 0;
+  font-size:1.12rem;
+  color: var(--neon-green);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-shadow: 0 6px 28px rgba(18,208,143,0.12);
+}
+
+/* Texto do detalhe do agendamento */
+.agendamento-concluido p{
+  margin: 0;
+  font-size:0.98rem;
+  color: rgba(235,255,245,0.96);
+  font-weight:600;
+  line-height:1.45;
+}
+
+/* Badge circular com ✓ no canto superior direito */
+.agendamento-concluido::after{
+  content: "✓";
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color:#04231a;
+  background: linear-gradient(180deg, var(--neon-green), var(--success-dark));
+  box-shadow: 0 10px 36px rgba(18,208,143,0.16), 0 0 30px rgba(18,208,143,0.08);
+  transform: translateY(-6px);
+  font-size:1.05rem;
+}
+
+/* Redirecionando / nota curta entre blocos */
+p.redirect-note,
+.dia-fechado-message + p,
+.agendamento-concluido + p{
+  margin-top:10px;
+  margin-bottom:0;
+  color: rgba(230,240,255,0.78);
+  font-size:0.95rem;
+  font-weight:600;
+}
+
+/* opcional: spinner simples ao lado do texto (use HTML <span class="spinner" />) */
+.spinner{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
+  box-shadow: 0 6px 18px rgba(59,139,255,0.12);
+  margin-left:10px;
+  animation: spin 900ms linear infinite;
+}
+@keyframes spin{ 0%{ transform: rotate(0deg) } 100%{ transform: rotate(360deg) } }
+
+/* -----------------------------
+   Botão secundário (Voltar para Serviços)
+   ----------------------------- */
+.btn-secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px;
+  min-height:44px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(0,0,0,0.06));
+  color: #e8f6ff;
+  font-weight:800;
+  cursor:pointer;
+  transition: transform 180ms var(--ease), box-shadow 180ms var(--ease), background 160ms var(--ease);
+  box-shadow: 0 8px 28px rgba(2,8,18,0.55);
+}
+
+/* Hover: leve brilho dourado e elevação (combina com cabeçalho) */
+.btn-secondary:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 26px 80px rgba(59,139,255,0.06), 0 6px 30px rgba(226,183,35,0.08);
+  background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(6,18,28,0.12));
+  border-color: rgba(228,183,31,0.09);
+}
+
+/* Focus e keyboard */
+.btn-secondary:focus-visible{
+  outline: 3px solid rgba(59,139,255,0.14);
+  outline-offset: 3px;
+  border-radius:10px;
+}
+
+/* Disabled state */
+.btn-secondary[disabled],
+.btn-secondary.disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* -----------------------------
+   Ajustes responsivos e utilitários
+   ----------------------------- */
+@media (max-width: 720px){
+  .dia-fechado-message, .agendamento-concluido{
+    padding:14px;
+    border-radius:12px;
+  }
+  .agendamento-concluido::after{ right:10px; top:10px; width:34px; height:34px; font-size:0.95rem; }
+  .btn-secondary{ padding:10px 12px; border-radius:10px; min-height:40px; }
+}
+
+/* Preferências de alto contraste */
+@media (prefers-contrast: more){
+  .dia-fechado-message{ border-left-color: var(--juno-orange); box-shadow:none; }
+  .agendamento-concluido{ box-shadow:none; border:1px solid rgba(18,208,143,0.18); }
+}
+
+.agendar-right h3 {
+  color: #fcfcfc;             /* azul vibrante */
+
+}
+
+.agendar-logo{
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.agendar-logo img{
+  max-width: 140px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+

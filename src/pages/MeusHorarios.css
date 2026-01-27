@@ -1,0 +1,87 @@
+.meus-horarios-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.meus-horarios-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+/* Card de cada horário */
+.horario-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.horario-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Ações */
+.acoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Botões */
+button {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #574fe3;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #333;
+  margin-top: 20px;
+}
+
+.btn-secondary:hover {
+  background-color: #cfcfcf;
+}
+
+.btn-danger {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #c62828;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .horario-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .acoes {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

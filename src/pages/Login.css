@@ -1,0 +1,176 @@
+/* =========================
+   VARIÁVEIS (mesmo padrão do sistema)
+========================= */
+:root{
+  --bg-page: #bfeef4;
+  --card-bg: #ffffff;
+  --accent: #49c0d6;
+  --accent-2: #7fe3ea;
+  --text-dark: #08323a;
+  --muted: #617d8b;
+  --radius-xl: 24px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --shadow: rgba(6,20,28,0.12);
+  --transition: 200ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.login-container{
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-page), #e9fbfe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   CARD
+========================= */
+.login-card{
+  width: 100%;
+  max-width: 360px;
+  background: linear-gradient(180deg, #ffffff, #fbfeff);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 18px 40px var(--shadow);
+  padding: 26px 22px 28px;
+  text-align: center;
+  animation: fadeUp .4s ease;
+}
+
+/* =========================
+   LOGO
+========================= */
+.login-logo{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.login-logo img{
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================
+   TEXTO
+========================= */
+.login-card h2{
+  margin: 0 0 6px 0;
+  color: var(--text-dark);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.login-card p{
+  margin: 0 0 18px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+.input-field{
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(6,20,28,0.12);
+  font-size: 14px;
+  outline: none;
+  transition: border var(--transition), box-shadow var(--transition);
+}
+
+.input-field:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(73,192,214,0.15);
+}
+
+/* =========================
+   BOTÃO
+========================= */
+.btn-primary{
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 12px 36px rgba(2,102,120,0.14);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.btn-primary:hover{
+  transform: translateY(-3px);
+}
+
+.btn-primary:active{
+  transform: translateY(-1px);
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+@keyframes fadeUp{
+  from{
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 420px){
+  .login-card{
+    padding: 22px 18px;
+  }
+
+  .login-logo img{
+    max-width: 130px;
+  }
+}
+
+/* =========================
+   DARK MODE (opcional)
+========================= */
+@media (prefers-color-scheme: dark){
+  .login-container{
+    background: linear-gradient(180deg, #041e27, #03161a);
+  }
+
+  .login-card{
+    background: linear-gradient(180deg, #041e27, #03161a);
+    color: #d7eef1;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  }
+
+  .login-card h2{
+    color: #eaf8fb;
+  }
+
+  .login-card p{
+    color: #9fb8c0;
+  }
+
+  .input-field{
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #eaf8fb;
+  }
+}
