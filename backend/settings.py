@@ -24,11 +24,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    # Em produção você adiciona:
-    # "seudominio.com",
-    # "api.seudominio.com",
+    'domleonel.com',
+    'www.domleonel.com',
+    'api.domleonel.com',
+    '127.0.0.1',
+    'localhost',
 ]
 
 # ------------------------------------------------
@@ -124,10 +124,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ------------------------------------------------
 # CORS (só necessário se frontend estiver em outro domínio)
 # ------------------------------------------------
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-
+CORS_ALLOWED_ORIGINS =  True
 CORS_ALLOW_CREDENTIALS = True
 
 # ------------------------------------------------
